@@ -6,6 +6,14 @@ export const createNoteRules = [
     body('body').optional().isString(),
     body('tags').optional().isArray(),
 ];
+export const updateNoteRules = [
+    body('titel').optional().isString().isLength({ min: 1, max: 120}),
+    body('body').optional().isString(),
+    body('tags')
+    .optional()
+    .isArray()
+    .custom((arr) => arr.every((t: any) => typeof t === 'string')),
+];
 
 export function validate(req: Request, res: Response, next: NextFunction) {
     const err = validationResult(req);
