@@ -9,7 +9,7 @@
     "build": "tsc",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
-    "test": "jest"
+    "test": "NODE_ENV=test jest"
   },
   "keywords": [],
   "author": "",
