@@ -4,14 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-  "start": "node dist/server.js",
-  "build": "tsc",
-  "lint": "eslint . --ext .ts",
-  "format": "prettier --write .",
-  "test": "jest"
-}
-,
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write .",
+    "test": "jest"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -20,13 +19,16 @@
     "express": "^5.1.0",
     "express-rate-limit": "^8.0.1",
     "express-validator": "^7.2.1",
-    "sqlite3": "^5.1.7"
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.2.0",
     "@types/supertest": "^6.0.3",
+    "@types/uuid": "^10.0.0",
     "eslint": "^9.32.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.3",
