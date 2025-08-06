@@ -45,7 +45,7 @@ export class NoteService {
         return note;
     }
 
-    async updateNote(id: string, data: Partial<Omit<Note, 'id' | 'createAt' | 'updateAt'>>): Promise<Note> {
+    async updateNote(id: string, data: Partial<Omit<Note, 'id' | 'createdAt' | 'updatedAt'>>): Promise<Note> {
         if (data.tags) {
             data.tags = data.tags.map(tag => tag.toLowerCase());
         }

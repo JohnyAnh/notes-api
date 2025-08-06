@@ -12,16 +12,16 @@ export interface ListOpts {
 }
 
 export class NoteRepo{
-    async create(data: Omit<Note, 'id' | 'createAt' | 'updateAt'>): Promise<Note> {
+    async create(data: Omit<Note, 'id' | 'createdAt' | 'updatedAt'>): Promise<Note> {
         const db = await openDb();
         const id = uuid();
         const now = new Date().toISOString();
         await db.run(`
-            INSERT INTO notes (id, title, body, tags, createAt, updateAt)
+            INSERT INTO notes (id, title, body, tags, createdAt, updatedAt)
             VALUES (?, ?, ?, ?, ?, ?)`,
-            id, data.title, data.body, JSON.stringify(data.tags), now, now
+            id, data.title, (data.body ?? ''), JSON.stringify(data.tags), now, now
         );
-        return {id, ...data, createAt: now, updateAt: now};
+        return {id, ...data, createdAt: now, updatedAt: now};
     }
     async list(opts: ListOpts): Promise<{ items: Note[]; total: number }> {
     const db = await openDb();
@@ -63,8 +63,8 @@ export class NoteRepo{
       tags: Array.isArray(row.tags)
     ? row.tags
     : JSON.parse(row.tags ?? '[]'),
-      createAt: row.createAt,
-      updateAt: row.updateAt,
+      createdAt: row.createdAt,
+      updatedAt: row.updatedAt,
     }));
 
     return { items, total };
@@ -77,8 +77,8 @@ export class NoteRepo{
         title: string;
         body: string;
         tags: string;
-        createAt: string;
-        updateAt: string;
+        createdAt: string;
+        updatedAt: string;
     }>(`SELECT * FROM notes WHERE id = ?`, id);
     if (!row) return null;
     return {
@@ -86,16 +86,16 @@ export class NoteRepo{
         title: row.title,
         body: row.body,
         tags: JSON.parse(row.tags),
-        createAt: row.createAt,
-        updateAt: row.updateAt,
+        createdAt: row.createdAt,
+        updatedAt: row.updatedAt,
     };
   }
 
-  async update(id: string, data: Partial<Omit<Note, 'id' | 'createAt' | 'updateAt'>>): Promise<Note | null> {
+  async update(id: string, data: Partial<Omit<Note, 'id' | 'createdAt' | 'updatedAt'>>): Promise<Note | null> {
     const db = await openDb();
     // Kiểm tra xem note có tồn tại không
-    const exiting = await this.getById(id);
-    if (!exiting) return null;
+    const existing = await this.getById(id);
+    if (!existing) return null;
 
     const sets: string[] = [];
     const params: any[] = [];
@@ -112,9 +112,9 @@ export class NoteRepo{
       params.push(JSON.stringify(data.tags));
     }
 
-    if (sets.length === 0) return null;
+    if (sets.length === 0) return existing;
     const now = new Date().toISOString();
-    sets.push('updateAt = ?');
+    sets.push('updatedAt = ?');
     params.push(now);
 
     const sql = `UPDATE notes SET ${sets.join(', ')} WHERE id = ?`;

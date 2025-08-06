@@ -2,12 +2,12 @@ import { body, validationResult } from "express-validator";
 import { Request,Response, NextFunction } from "express";
 
 export const createNoteRules = [
-    body('titel').isString().isLength({ min: 1, max: 120}),
+    body('title').isString().isLength({ min: 1, max: 120}),
     body('body').optional().isString(),
     body('tags').optional().isArray(),
 ];
 export const updateNoteRules = [
-    body('titel').optional().isString().isLength({ min: 1, max: 120}),
+    body('title').optional().isString().isLength({ min: 1, max: 120}),
     body('body').optional().isString(),
     body('tags')
     .optional()
