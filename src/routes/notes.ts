@@ -1,9 +1,15 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
+import {
+  createNote,
+} from '../controllers/note.controller';
+import {
+  createNoteRules,
+  validate,
+} from '../middlewares/validate.note';
+
 const router = Router();
 
-// tạm 1 route ping để test
-router.get('/ping', (_req: Request, res: Response) => {
-  res.json({ message: 'pong' });
-});
+router.post('/', createNoteRules, validate, createNote);
+
 
 export default router;
