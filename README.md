@@ -149,7 +149,7 @@ curl -X DELETE http://localhost:3000/notes/{note_id}
 
 ## ⏱️ Thời gian thực hiện & Cải tiến nếu có thêm thời gian
 
-- **Thời gian thực hiện**: Khoảng 4-6 tiếng, bao gồm cài đặt, phát triển và kiểm thử. Tranh thủ làm lúc giờ nghỉ cũng như buổi tối nghin cứu
+- **Thời gian thực hiện**: Khoảng 6-8 tiếng, bao gồm cài đặt môi trường project, nghin cứu, phát triển và kiểm thử. Tranh thủ làm lúc giờ nghỉ cũng như buổi tối nghin cứu làm bài test này.
 - **Nếu có thêm thời gian**:
 - Thực hành viết nhiều mã hơn với TypeScript
 - Thêm mã hóa tất cả các Id đầu ra và đầu vào
